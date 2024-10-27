@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cloud.mapper.Directory_indexMapper">
+  <resultMap id="BaseResultMap" type="com.example.cloud.model.Directory_index">
+    <id column="directoryName" jdbcType="VARCHAR" property="directoryname" />
+    <result column="LocalRemote" jdbcType="INTEGER" property="localremote" />
+    <result column="location" jdbcType="VARCHAR" property="location" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    directoryName, LocalRemote, location
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from directory_index
+    where directoryName = #{directoryname,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from directory_index
+    where directoryName = #{directoryname,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.cloud.model.Directory_index">
+    insert into directory_index (directoryName, LocalRemote, location
+      )
+    values (#{directoryname,jdbcType=VARCHAR}, #{localremote,jdbcType=INTEGER}, #{location,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.cloud.model.Directory_index">
+    insert into directory_index
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="directoryname != null">
+        directoryName,
+      </if>
+      <if test="localremote != null">
+        LocalRemote,
+      </if>
+      <if test="location != null">
+        location,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="directoryname != null">
+        #{directoryname,jdbcType=VARCHAR},
+      </if>
+      <if test="localremote != null">
+        #{localremote,jdbcType=INTEGER},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.cloud.model.Directory_index">
+    update directory_index
+    <set>
+      <if test="localremote != null">
+        LocalRemote = #{localremote,jdbcType=INTEGER},
+      </if>
+      <if test="location != null">
+        location = #{location,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where directoryName = #{directoryname,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.cloud.model.Directory_index">
+    update directory_index
+    set LocalRemote = #{localremote,jdbcType=INTEGER},
+      location = #{location,jdbcType=VARCHAR}
+    where directoryName = #{directoryname,jdbcType=VARCHAR}
+  </update>
+</mapper>

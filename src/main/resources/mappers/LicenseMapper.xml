@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cloud.mapper.LicenseMapper">
+  <resultMap id="BaseResultMap" type="com.example.cloud.model.License">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="licenseName" jdbcType="VARCHAR" property="licensename" />
+    <result column="procedureName" jdbcType="VARCHAR" property="procedurename" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="licenseKey" jdbcType="VARCHAR" property="licensekey" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="Exp" jdbcType="DATE" property="exp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, licenseName, procedureName, description, licenseKey, createTime, Exp
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from license
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from license
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.cloud.model.License">
+    insert into license (id, licenseName, procedureName, 
+      description, licenseKey, createTime, 
+      Exp)
+    values (#{id,jdbcType=INTEGER}, #{licensename,jdbcType=VARCHAR}, #{procedurename,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{licensekey,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{exp,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.cloud.model.License">
+    insert into license
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="licensename != null">
+        licenseName,
+      </if>
+      <if test="procedurename != null">
+        procedureName,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="licensekey != null">
+        licenseKey,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="exp != null">
+        Exp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="licensename != null">
+        #{licensename,jdbcType=VARCHAR},
+      </if>
+      <if test="procedurename != null">
+        #{procedurename,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="licensekey != null">
+        #{licensekey,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exp != null">
+        #{exp,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.cloud.model.License">
+    update license
+    <set>
+      <if test="licensename != null">
+        licenseName = #{licensename,jdbcType=VARCHAR},
+      </if>
+      <if test="procedurename != null">
+        procedureName = #{procedurename,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="licensekey != null">
+        licenseKey = #{licensekey,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exp != null">
+        Exp = #{exp,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.cloud.model.License">
+    update license
+    set licenseName = #{licensename,jdbcType=VARCHAR},
+      procedureName = #{procedurename,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      licenseKey = #{licensekey,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      Exp = #{exp,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

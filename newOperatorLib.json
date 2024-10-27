@@ -1,0 +1,4743 @@
+{
+  "图像处理": [
+    {
+      "state": "init",
+      "superName": "图像处理",
+      "name": "图像滤波",
+      "dllPath": "resources/imgProc/image_filter.dll",
+      "roiUI": {
+        "type": ["rect", "circle", "polygon"]
+      },
+      "resultShowUI": {
+        "图像显示": [
+          {
+            "label": "检测区域",
+            "param": "detect_area"
+          },
+          {
+            "label": "屏蔽区多边形",
+            "param": "mask"
+          },
+          {
+            "label": "扇环检测区域",
+            "param": "roi_circle"
+          }
+        ]
+      },
+      "models": [
+        {
+          "modelName": "高斯",
+          "modelID": "gaussianBlurImage",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "核尺寸",
+              "varName": "ksize",
+              "varType": "int",
+              "fromExpression": "3",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "",
+              "low": 1,
+              "high": 51,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        },
+        {
+          "modelName": "均值",
+          "modelID": "meanBlurImage",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "Mat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "varExplanation": "源图像"
+            },
+            {
+              "varLabel": "核宽度",
+              "varName": "width",
+              "varType": "int",
+              "fromExpression": "3",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "",
+              "low": 1,
+              "high": 51,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "核高度",
+              "varName": "height",
+              "varType": "int",
+              "fromExpression": "3",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "",
+              "low": 1,
+              "high": 51,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        },
+        {
+          "modelName": "中值",
+          "modelID": "medianBlurImage",
+          "helpMsg": "helpMsg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "核尺寸",
+              "varName": "ksize",
+              "varType": "int",
+              "fromExpression": "3",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "",
+              "low": 1,
+              "high": 51,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        },
+        {
+          "modelName": "双边滤波",
+          "helpMsg": "it is a help message",
+          "modelID": "bilateralBlurImage",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "Mat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "领域直径",
+              "varName": "d",
+              "varType": "int",
+              "fromExpression": "3",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "",
+              "low": 0,
+              "high": 51,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "颜色空间sigma",
+              "varName": "sigmaColor",
+              "varType": "int",
+              "fromExpression": "75",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "",
+              "low": 0,
+              "high": 200,
+              "step": 1,
+              "precision" : 0 
+              
+            },
+            {
+              "varLabel": "坐标空间sigma",
+              "varName": "sigmaSpace",
+              "varType": "int",
+              "fromExpression": "75",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "",
+              "low": 0,
+              "high": 200,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        }
+      ],
+      "outPara": [
+        {
+          "varLabel": "模块状态",
+          "varName": "status",
+          "varType": "int",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "输出图像",
+          "varName": "img",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "输出图像数据",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出图像宽度",
+              "varName": "width",
+              "varType": "int",
+              "currentDataFlag": true
+            },
+            {
+              "varLabel": "输出图像高度",
+              "varName": "height",
+              "varType": "int"
+            },
+            {
+              "varLabel": "输出图像像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        },
+        {
+          "varLabel": "输出掩膜",
+          "varName": "mask",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "输出掩膜图像",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出掩膜宽度",
+              "varName": "width",
+              "varType": "int",
+              "varExpression": ""
+            },
+            {
+              "varLabel": "输出掩膜高度",
+              "varName": "height",
+              "varType": "int"
+            },
+            {
+              "varLabel": "输出掩膜像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        },
+        {
+          "varLabel": "检测区域",
+          "varName": "detect_area",
+          "varType": "GeliRect",
+          "children": [
+            {
+              "varLabel": "检测区域中心点",
+              "varName": "center",
+              "varType": "GeliPoint",
+              "children": [
+                {
+                  "varLabel": "检测区域中心点X",
+                  "varName": "x",
+                  "varType": "double"
+                },
+                {
+                  "varLabel": "检测区域中心点Y",
+                  "varName": "y",
+                  "varType": "double"
+                }
+              ]
+            },
+            {
+              "varLabel": "检测区域宽度",
+              "varName": "width",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域高度",
+              "varName": "height",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域角度",
+              "varName": "angle",
+              "varType": "double"
+            }
+          ]
+        },
+        {
+          "varLabel": "ROI圆弧",
+          "varName": "roi_circle",
+          "varType": "GeliCircle",
+          "children": [
+            {
+              "varLabel": "检测圆弧中心点",
+              "varName": "center",
+              "varType": "GeliPoint",
+              "children": [
+                {
+                  "varLabel": "检测圆弧中心点X",
+                  "varName": "x",
+                  "varType": "double"
+                },
+                {
+                  "varLabel": "检测圆弧中心点Y",
+                  "varName": "y",
+                  "varType": "double"
+                }
+              ]
+            },
+            {
+              "varLabel": "检测圆弧内径",
+              "varName": "dI",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测圆弧外径",
+              "varName": "dO",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测圆弧起始角度",
+              "varName": "angleStart",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测圆弧角度范围",
+              "varName": "angleRange",
+              "varType": "double"
+            }
+          ]
+        },
+        {
+          "varLabel": "屏蔽区多边形",
+          "varName": "mask_polygon",
+          "varType": "vector<GeliContour>",
+          "children": [
+            {
+              "varLabel": "多边形点数",
+              "varName": "size",
+              "varType": "vector<int>"
+            },
+            {
+              "varLabel": "多边形点集",
+              "varName": "points",
+              "varType": "vector<GeliPoint>",
+              "children": [
+                {
+                  "varLabel": "多边形点X",
+                  "varName": "xs",
+                  "varType": "vector<double>"
+                },
+                {
+                  "varLabel": "多边形点Y",
+                  "varName": "ys",
+                  "varType": "vector<double>"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "state": "init",
+      "superName": "图像处理",
+      "name": "几何变换",
+      "dllPath": "resources/imgProc/geometric_transformation.dll",
+      "roiUI": {
+        "type": ["rect", "circle", "polygon"]
+      },
+      "models": [
+        {
+          "modelID": "imageMirrorRotate",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "镜像方向",
+              "varName": "direction",
+              "varType": "int",
+              "fromExpression": "2",
+              "defineVarInputWay": "selectedInputWay",
+              "comboList": {"无":"2", "水平":"1", "垂直":"0","水平垂直":"-1"},
+              "varExplanation": "镜像方向"
+            },
+            {
+              "varLabel": "旋转角度",
+              "varName": "angle",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "selectedInputWay",
+              "comboList": {"0":"0", "90":"90", "180":"180","270":"270"},
+              "varExplanation": "旋转角度"
+            }
+          ]
+        }
+      ],
+      "outPara": [
+        {
+          "varLabel": "模块状态",
+          "varName": "status",
+          "varType": "int",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "输出图像",
+          "varName": "img",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "输出图像数据",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出图像宽度",
+              "varName": "width",
+              "varType": "int",
+              "currentDataFlag": true
+            },
+            {
+              "varLabel": "输出图像高度",
+              "varName": "height",
+              "varType": "int"
+            },
+            {
+              "varLabel": "输出图像像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "state": "init",
+      "superName": "图像处理",
+      "name": "仿射变换",
+      "dllPath": "resources/imgProc/affine_transfer.dll",
+      "roiUI": {
+        "type": ["rect"]
+      },
+      "models": [
+        {
+          "modelName": "裁剪缩放",
+          "modelID": "imageCropZoom",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "尺度",
+              "varName": "scale",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "尺度缩放",
+              "low": 0.10,
+              "high": 10.00,
+              "step": 0.1,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "宽高比",
+              "varName": "aspectRatio",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "图像的宽高比",
+              "low": 0.10,
+              "high": 2.00,
+              "step": 0.1,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "插值方法",
+              "varName": "interplateMethod",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "selectedInputWay",
+              "comboList": {"最近邻":"0", "双线性":"1"},
+              "varExplanation": "插值方法"
+            },
+            {
+              "varLabel": "填充方式",
+              "varName": "borderType",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "selectedInputWay",
+              "comboList": {"常数":"0", "邻近复制":"1"},
+              "varExplanation": "填充方式"
+            },
+            {
+              "varLabel": "锁定输出尺寸",
+              "varName": "lockOutputSize",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "selectedInputWay",
+              "comboList": {"否":"0", "是":"1"},
+              "varExplanation": "锁定输出尺寸"
+            },
+            {
+              "varLabel": "宽度",
+              "varName": "outputWidth",
+              "varType": "int",
+              "fromExpression": "10",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "宽度",
+              "low": 10,
+              "high": 30000,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "高度",
+              "varName": "outputHeight",
+              "varType": "int",
+              "fromExpression": "10",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "高度",
+              "low": 10,
+              "high": 30000,
+              "step": 1,
+              "precision" : 0 
+            },       
+            {
+              "varLabel": "填充值",
+              "varName": "borderConstantValue",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "填充值",
+              "low": 0,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        },
+        {
+          "modelName":"镜像",
+          "modelID": "imageMirror",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "镜像方向",
+              "varName": "direction",
+              "varType": "int",
+              "fromExpression": "1",
+              "defineVarInputWay": "selectedInputWay",
+              "comboList": {"水平":"1", "垂直":"0","水平垂直":"-1"},
+              "varExplanation": "镜像方向"
+            },
+            {
+              "varLabel": "锁定输出尺寸",
+              "varName": "lockOutputSize",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "selectedInputWay",
+              "comboList": {"否":"0", "是":"1"},
+              "varExplanation": "锁定输出尺寸"
+            },
+            {
+              "varLabel": "宽度",
+              "varName": "outputWidth",
+              "varType": "int",
+              "fromExpression": "10",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "宽度",
+              "low": 10,
+              "high": 30000,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "高度",
+              "varName": "outputHeight",
+              "varType": "int",
+              "fromExpression": "10",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "高度",
+              "low": 10,
+              "high": 30000,
+              "step": 1,
+              "precision" : 0 
+            },       
+            {
+              "varLabel": "填充值",
+              "varName": "borderConstantValue",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "填充值",
+              "low": 0,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        },
+        {
+          "modelName":"平移",
+          "modelID": "imageTranslate",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "X移动距离",
+              "varName": "shiftX",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "X方向移动距离",
+              "low": -30000,
+              "high": 30000,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "Y移动距离",
+              "varName": "shiftY",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "Y方向移动距离",
+              "low": -30000,
+              "high": 30000,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "填充值",
+              "varName": "borderConstantValue",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "像素填充值",
+              "low": 0,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "锁定输出尺寸",
+              "varName": "lockOutputSize",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "selectedInputWay",
+              "comboList": {"否":"0", "是":"1"},
+              "varExplanation": "锁定输出尺寸"
+            },
+            {
+              "varLabel": "宽度",
+              "varName": "outputWidth",
+              "varType": "int",
+              "fromExpression": "10",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "宽度",
+              "low": 10,
+              "high": 30000,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "高度",
+              "varName": "outputHeight",
+              "varType": "int",
+              "fromExpression": "10",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "高度",
+              "low": 10,
+              "high": 30000,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        }
+      ],
+      "outPara": [
+        {
+          "varLabel": "模块状态",
+          "varName": "status",
+          "varType": "int",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "输出图像",
+          "varName": "img",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "输出图像数据",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出图像宽度",
+              "varName": "width",
+              "varType": "int",
+              "currentDataFlag": true
+            },
+            {
+              "varLabel": "输出图像高度",
+              "varName": "height",
+              "varType": "int"
+            },
+            {
+              "varLabel": "输出图像像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        },
+        {
+          "varLabel": "输出掩膜",
+          "varName": "mask",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "输出掩膜图像",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出掩膜宽度",
+              "varName": "width",
+              "varType": "int",
+              "varExpression": ""
+            },
+            {
+              "varLabel": "输出掩膜高度",
+              "varName": "height",
+              "varType": "int"
+            },
+            {
+              "varLabel": "输出掩膜像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        },
+        {
+          "varLabel": "检测区域",
+          "varName": "detect_area",
+          "varType": "GeliRect",
+          "children": [
+            {
+              "varLabel": "检测区域中心点",
+              "varName": "center",
+              "varType": "GeliPoint",
+              "children": [
+                {
+                  "varLabel": "检测区域中心点X",
+                  "varName": "x",
+                  "varType": "double"
+                },
+                {
+                  "varLabel": "检测区域中心点Y",
+                  "varName": "y",
+                  "varType": "double"
+                }
+              ]
+            },
+            {
+              "varLabel": "检测区域宽度",
+              "varName": "width",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域高度",
+              "varName": "height",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域角度",
+              "varName": "angle",
+              "varType": "double"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "state": "init",
+      "superName": "图像处理",
+      "name": "拷贝填充",
+      "dllPath": "resources/imgProc/copy_padding.dll",
+      "roiUI": {
+        "type": ["rect", "circle", "polygon", "arc"]
+      },
+      "resultShowUI": {
+        "图像显示": [
+          {
+            "label": "检测区域",
+            "param": "detect_area"
+          },
+          {
+            "label": "扇环检测区域",
+            "param": "roi_circle"
+          }
+        ]
+      },
+      "models": [
+        {
+          "modelName": "拷贝",
+          "modelID": "imageCopy",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "区域外填充值",
+              "varName": "paddingValueOutside",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "区域外填充值",
+              "low": 0,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        },
+        {
+          "modelName": "填充",
+          "modelID": "imagePadding",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "区域内填充值",
+              "varName": "paddingValueInside",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "区域外填充值",
+              "low": 0,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "区域外填充值",
+              "varName": "paddingValueOutside",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "区域外填充值",
+              "low": 0,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        }
+      ],
+      "outPara": [
+        {
+          "varLabel": "模块状态",
+          "varName": "status",
+          "varType": "int",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "输出图像",
+          "varName": "img",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "输出图像数据",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出图像宽度",
+              "varName": "width",
+              "varType": "int",
+              "currentDataFlag": true
+            },
+            {
+              "varLabel": "输出图像高度",
+              "varName": "height",
+              "varType": "int"
+            },
+            {
+              "varLabel": "输出图像像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        },
+        {
+          "varLabel": "输出掩膜",
+          "varName": "mask",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "输出掩膜图像",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出掩膜宽度",
+              "varName": "width",
+              "varType": "int",
+              "varExpression": ""
+            },
+            {
+              "varLabel": "输出掩膜高度",
+              "varName": "height",
+              "varType": "int"
+            },
+            {
+              "varLabel": "输出掩膜像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        },
+        {
+          "varLabel": "检测区域",
+          "varName": "detect_area",
+          "varType": "GeliRect",
+          "children": [
+            {
+              "varLabel": "检测区域中心点",
+              "varName": "center",
+              "varType": "GeliPoint",
+              "children": [
+                {
+                  "varLabel": "检测区域中心点X",
+                  "varName": "x",
+                  "varType": "double"
+                },
+                {
+                  "varLabel": "检测区域中心点Y",
+                  "varName": "y",
+                  "varType": "double"
+                }
+              ]
+            },
+            {
+              "varLabel": "检测区域宽度",
+              "varName": "width",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域高度",
+              "varName": "height",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域角度",
+              "varName": "angle",
+              "varType": "double"
+            }
+          ]
+        },
+        {
+          "varLabel": "ROI圆弧",
+          "varName": "roi_circle",
+          "varType": "GeliCircle",
+          "children": [
+            {
+              "varLabel": "检测圆弧中心点",
+              "varName": "center",
+              "varType": "GeliPoint",
+              "children": [
+                {
+                  "varLabel": "检测圆弧中心点X",
+                  "varName": "x",
+                  "varType": "double"
+                },
+                {
+                  "varLabel": "检测圆弧中心点Y",
+                  "varName": "y",
+                  "varType": "double"
+                }
+              ]
+            },
+            {
+              "varLabel": "检测圆弧内径",
+              "varName": "dI",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测圆弧外径",
+              "varName": "dO",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测圆弧起始角度",
+              "varName": "angleStart",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测圆弧角度范围",
+              "varName": "angleRange",
+              "varType": "double"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "state": "init",
+      "superName": "图像处理",
+      "name": "图像运算",
+      "dllPath": "resources/imgProc/image_operation.dll",
+      "roiUI": {
+        "type": ["rect"]
+      },
+      "resultShowUI": {
+        "图像显示": [
+          {
+            "label": "检测区域",
+            "param": "detect_area"
+          }
+        ]
+      },
+      "models": [
+        {
+          "modelName": "图像加",
+          "modelID": "imageAdd",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源1",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "图像权重1",
+              "varName": "imageWeight1",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像权重",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.01,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "图像补偿1",
+              "varName": "imageCompensation1",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像补偿",
+              "low": -255,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "图像源2",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "图像权重2",
+              "varName": "imageWeight2",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像权重",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.01,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "图像补偿2",
+              "varName": "imageCompensation2",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像补偿",
+              "low": -255,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        },
+        {
+          "modelName": "图像减",
+          "modelID": "imageSubtract",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源1",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "图像权重1",
+              "varName": "imageWeight1",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像权重",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.01,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "图像补偿1",
+              "varName": "imageCompensation1",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像补偿",
+              "low": -255,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "图像源2",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "图像权重2",
+              "varName": "imageWeight2",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像权重",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.01,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "图像补偿2",
+              "varName": "imageCompensation2",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像补偿",
+              "low": -255,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        },
+        {
+          "modelName": "图像绝对差",
+          "modelID": "imageAbsDiff",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源1",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "图像权重1",
+              "varName": "imageWeight1",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像权重",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.01,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "图像补偿1",
+              "varName": "imageCompensation1",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像补偿",
+              "low": -255,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "图像源2",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "图像权重2",
+              "varName": "imageWeight2",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像权重",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.01,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "图像补偿2",
+              "varName": "imageCompensation2",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像补偿",
+              "low": -255,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        },
+        {
+          "modelName": "两者最大值",
+          "modelID": "imageMax",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源1",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "图像权重1",
+              "varName": "imageWeight1",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像权重",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.01,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "图像补偿1",
+              "varName": "imageCompensation1",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像补偿",
+              "low": -255,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "图像源2",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "图像权重2",
+              "varName": "imageWeight2",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像权重",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.01,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "图像补偿2",
+              "varName": "imageCompensation2",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像补偿",
+              "low": -255,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        },
+        {
+          "modelName": "两者最小值",
+          "modelID": "imageMin",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源1",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "图像权重1",
+              "varName": "imageWeight1",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像权重",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.01,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "图像补偿1",
+              "varName": "imageCompensation1",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像补偿",
+              "low": -255,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "图像源2",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "图像权重2",
+              "varName": "imageWeight2",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像权重",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.01,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "图像补偿2",
+              "varName": "imageCompensation2",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像补偿",
+              "low": -255,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        },
+        {
+          "modelName": "两者均值",
+          "modelID": "imageMean",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源1",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "图像权重1",
+              "varName": "imageWeight1",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像权重",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.01,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "图像补偿1",
+              "varName": "imageCompensation1",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像补偿",
+              "low": -255,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "图像源2",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "图像权重2",
+              "varName": "imageWeight2",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像权重",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.01,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "图像补偿2",
+              "varName": "imageCompensation2",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像补偿",
+              "low": -255,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        },
+        {
+          "modelName": "图像与",
+          "modelID": "imageAnd",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源1",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "图像权重1",
+              "varName": "imageWeight1",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像权重",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.01,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "图像补偿1",
+              "varName": "imageCompensation1",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像补偿",
+              "low": -255,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "图像源2",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "图像权重2",
+              "varName": "imageWeight2",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像权重",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.01,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "图像补偿2",
+              "varName": "imageCompensation2",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像补偿",
+              "low": -255,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        },
+        {
+          "modelName": "图像或",
+          "modelID": "imageOr",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源1",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "图像权重1",
+              "varName": "imageWeight1",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像权重",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.01,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "图像补偿1",
+              "varName": "imageCompensation1",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像补偿",
+              "low": -255,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "图像源2",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "图像权重2",
+              "varName": "imageWeight2",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像权重",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.01,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "图像补偿2",
+              "varName": "imageCompensation2",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像补偿",
+              "low": -255,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        },
+        {
+          "modelName": "图像异或",
+          "modelID": "imageXor",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源1",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "图像权重1",
+              "varName": "imageWeight1",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像权重",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.01,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "图像补偿1",
+              "varName": "imageCompensation1",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像补偿",
+              "low": -255,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "图像源2",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "图像权重2",
+              "varName": "imageWeight2",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像权重",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.01,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "图像补偿2",
+              "varName": "imageCompensation2",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "图像补偿",
+              "low": -255,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        }
+        
+      ],
+      "outPara": [
+        {
+          "varLabel": "模块状态",
+          "varName": "status",
+          "varType": "int",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "输出图像",
+          "varName": "img",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "输出图像数据",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出图像宽度",
+              "varName": "width",
+              "varType": "int",
+              "currentDataFlag": true
+            },
+            {
+              "varLabel": "输出图像高度",
+              "varName": "height",
+              "varType": "int"
+            },
+            {
+              "varLabel": "输出图像像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        },
+        {
+          "varLabel": "输出掩膜",
+          "varName": "mask",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "输出掩膜图像",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出掩膜宽度",
+              "varName": "width",
+              "varType": "int",
+              "varExpression": ""
+            },
+            {
+              "varLabel": "输出掩膜高度",
+              "varName": "height",
+              "varType": "int"
+            },
+            {
+              "varLabel": "输出掩膜像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        },
+        {
+          "varLabel": "检测区域",
+          "varName": "detect_area",
+          "varType": "GeliRect",
+          "children": [
+            {
+              "varLabel": "检测区域中心点",
+              "varName": "center",
+              "varType": "GeliPoint",
+              "children": [
+                {
+                  "varLabel": "检测区域中心点X",
+                  "varName": "x",
+                  "varType": "double"
+                },
+                {
+                  "varLabel": "检测区域中心点Y",
+                  "varName": "y",
+                  "varType": "double"
+                }
+              ]
+            },
+            {
+              "varLabel": "检测区域宽度",
+              "varName": "width",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域高度",
+              "varName": "height",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域角度",
+              "varName": "angle",
+              "varType": "double"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "state": "init",
+      "superName": "图像处理",
+      "name": "图像归一化",
+      "dllPath": "resources/imgProc/image_normalize.dll",
+      "roiUI": {
+        "type": ["rect", "circle", "polygon", "arc"]
+      },
+      "resultShowUI": {
+        "图像显示": [
+          {
+            "label": "检测区域",
+            "param": "detect_area"
+          },
+          {
+            "label": "扇环检测区域",
+            "param": "roi_circle"
+          }
+        ]
+      },
+      "models": [
+        {
+          "modelName": "直方图均衡化",
+          "modelID": "imageEqualizeHist",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            }
+          ]
+        },
+        {
+          "modelName": "直方图归一化",
+          "modelID": "imageNormalized",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "灰度最小值",
+              "varName": "grayMin",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "灰度最小值",
+              "low": 0,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "灰度最大值",
+              "varName": "grayMax",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "灰度最大值",
+              "low": 0,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        },
+        {
+          "modelName": "均值方差归一化",
+          "modelID": "imageMeanStdNormalized",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "均值",
+              "varName": "mean",
+              "varType": "double",
+              "fromExpression": "128.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "均值",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.1,
+              "precision" : 2 
+            },
+            {
+              "varLabel": "标准差",
+              "varName": "stddev",
+              "varType": "double",
+              "fromExpression": "20.00",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "标准差",
+              "low": 0.00,
+              "high": 255.00,
+              "step": 0.1,
+              "precision" : 2 
+            }
+          ]
+        }
+      ],
+      "outPara": [
+        {
+          "varLabel": "模块状态",
+          "varName": "status",
+          "varType": "int",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "输出图像",
+          "varName": "img",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "输出图像数据",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出图像宽度",
+              "varName": "width",
+              "varType": "int",
+              "currentDataFlag": true
+            },
+            {
+              "varLabel": "输出图像高度",
+              "varName": "height",
+              "varType": "int"
+            },
+            {
+              "varLabel": "输出图像像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        },
+        {
+          "varLabel": "输出掩膜",
+          "varName": "mask",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "输出掩膜图像",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出掩膜宽度",
+              "varName": "width",
+              "varType": "int",
+              "varExpression": ""
+            },
+            {
+              "varLabel": "输出掩膜高度",
+              "varName": "height",
+              "varType": "int"
+            },
+            {
+              "varLabel": "输出掩膜像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        },
+        {
+          "varLabel": "检测区域",
+          "varName": "detect_area",
+          "varType": "GeliRect",
+          "children": [
+            {
+              "varLabel": "检测区域中心点",
+              "varName": "center",
+              "varType": "GeliPoint",
+              "children": [
+                {
+                  "varLabel": "检测区域中心点X",
+                  "varName": "x",
+                  "varType": "double"
+                },
+                {
+                  "varLabel": "检测区域中心点Y",
+                  "varName": "y",
+                  "varType": "double"
+                }
+              ]
+            },
+            {
+              "varLabel": "检测区域宽度",
+              "varName": "width",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域高度",
+              "varName": "height",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域角度",
+              "varName": "angle",
+              "varType": "double"
+            }
+          ]
+        },
+        {
+          "varLabel": "ROI圆弧",
+          "varName": "roi_circle",
+          "varType": "GeliCircle",
+          "children": [
+            {
+              "varLabel": "检测圆弧中心点",
+              "varName": "center",
+              "varType": "GeliPoint",
+              "children": [
+                {
+                  "varLabel": "检测圆弧中心点X",
+                  "varName": "x",
+                  "varType": "double"
+                },
+                {
+                  "varLabel": "检测圆弧中心点Y",
+                  "varName": "y",
+                  "varType": "double"
+                }
+              ]
+            },
+            {
+              "varLabel": "检测圆弧内径",
+              "varName": "dI",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测圆弧外径",
+              "varName": "dO",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测圆弧起始角度",
+              "varName": "angleStart",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测圆弧角度范围",
+              "varName": "angleRange",
+              "varType": "double"
+            }
+          ]
+        }
+      ]
+    }, 
+    {
+      "state": "init",
+      "superName": "图像处理",
+      "name": "图像增强",
+      "dllPath": "resources/imgProc/image_enhance.dll",
+      "roiUI": {
+        "type": ["rect", "circle", "polygon"]
+      },
+      "resultShowUI": {
+        "图像显示": [
+          {
+            "label": "检测区域",
+            "param": "detect_area"
+          },
+          {
+            "label": "屏蔽区多边形",
+            "param": "mask"
+          },
+          {
+            "label": "扇环检测区域",
+            "param": "roi_circle"
+          }
+        ]
+      },
+      "models": [
+        {
+          "modelName": "锐化",
+          "modelID": "imageResharpen",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "锐化系数",
+              "varName": "resharpenCoefficient",
+              "varType": "int",
+              "fromExpression": "1",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "",
+              "low": 1,
+              "high": 8,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        },
+        {
+          "modelName": "Gamma校正",
+          "modelID": "imageGammaAdjust",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "Gamma系数",
+              "varName": "gammaCoefficient",
+              "varType": "double",
+              "fromExpression": "1.0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "",
+              "low": 0.00,
+              "high": 10.00,
+              "step": 0.1,
+              "precision" : 2 
+            }
+          ]
+        },
+        {
+          "modelName": "亮度校正",
+          "modelID": "imageBrightnessCorrection",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "增益",
+              "varName": "gain",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "",
+              "low": 0,
+              "high": 100,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "亮度校正补偿",
+              "varName": "offset",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "",
+              "low": -255,
+              "high": 255,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        }
+      ],
+      "outPara": [
+        {
+          "varLabel": "模块状态",
+          "varName": "status",
+          "varType": "int",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "输出图像",
+          "varName": "img",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "输出图像数据",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出图像宽度",
+              "varName": "width",
+              "varType": "int",
+              "currentDataFlag": true
+            },
+            {
+              "varLabel": "输出图像高度",
+              "varName": "height",
+              "varType": "int"
+            },
+            {
+              "varLabel": "输出图像像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        },
+        {
+          "varLabel": "输出掩膜",
+          "varName": "mask",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "输出掩膜图像",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出掩膜宽度",
+              "varName": "width",
+              "varType": "int",
+              "varExpression": ""
+            },
+            {
+              "varLabel": "输出掩膜高度",
+              "varName": "height",
+              "varType": "int"
+            },
+            {
+              "varLabel": "输出掩膜像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        },
+        {
+          "varLabel": "检测区域",
+          "varName": "detect_area",
+          "varType": "GeliRect",
+          "children": [
+            {
+              "varLabel": "检测区域中心点",
+              "varName": "center",
+              "varType": "GeliPoint",
+              "children": [
+                {
+                  "varLabel": "检测区域中心点X",
+                  "varName": "x",
+                  "varType": "double"
+                },
+                {
+                  "varLabel": "检测区域中心点Y",
+                  "varName": "y",
+                  "varType": "double"
+                }
+              ]
+            },
+            {
+              "varLabel": "检测区域宽度",
+              "varName": "width",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域高度",
+              "varName": "height",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域角度",
+              "varName": "angle",
+              "varType": "double"
+            }
+          ]
+        },
+        {
+          "varLabel": "ROI圆弧",
+          "varName": "roi_circle",
+          "varType": "GeliCircle",
+          "children": [
+            {
+              "varLabel": "检测圆弧中心点",
+              "varName": "center",
+              "varType": "GeliPoint",
+              "children": [
+                {
+                  "varLabel": "检测圆弧中心点X",
+                  "varName": "x",
+                  "varType": "double"
+                },
+                {
+                  "varLabel": "检测圆弧中心点Y",
+                  "varName": "y",
+                  "varType": "double"
+                }
+              ]
+            },
+            {
+              "varLabel": "检测圆弧内径",
+              "varName": "dI",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测圆弧外径",
+              "varName": "dO",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测圆弧起始角度",
+              "varName": "angleStart",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测圆弧角度范围",
+              "varName": "angleRange",
+              "varType": "double"
+            }
+          ]
+        },
+        {
+          "varLabel": "屏蔽区多边形",
+          "varName": "mask_polygon",
+          "varType": "vector<GeliContour>",
+          "children": [
+            {
+              "varLabel": "多边形点数",
+              "varName": "size",
+              "varType": "vector<int>"
+            },
+            {
+              "varLabel": "多边形点集",
+              "varName": "points",
+              "varType": "vector<GeliPoint>",
+              "children": [
+                {
+                  "varLabel": "多边形点X",
+                  "varName": "xs",
+                  "varType": "vector<double>"
+                },
+                {
+                  "varLabel": "多边形点Y",
+                  "varName": "ys",
+                  "varType": "vector<double>"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },   
+    {
+      "state": "init",
+      "superName": "图像处理",
+      "name": "二值化",
+      "dllPath": "resources/imgProc/image_binarize.dll",
+      "roiUI": {
+        "type": ["rect", "circle", "polygon"]
+      },
+      "models": [
+        {
+          "modelName": "硬阈值二值化",
+          "modelID": "threshold",
+          "helpMsg": "threshold help message",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "低阈值",
+              "varName": "low",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "低阈值"
+            } ,
+            {
+                "varLabel": "高阈值",
+                "varName": "high",
+                "varType": "int",
+                "fromExpression": "255",
+                "defineVarInputWay": "directInputWay",
+                "varExplanation": "高阈值"
+            }
+          ]
+        },
+        {
+          "modelName": "均值二值化",
+          "modelID": "mean_threshold",
+          "helpMsg": "mean_threshold help message",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "滤波核宽度",
+              "varName": "w",
+              "varType": "int",
+              "fromExpression": "3",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "滤波核宽度"
+            } ,
+            {
+                "varLabel": "滤波核高度",
+                "varName": "h",
+                "varType": "int",
+                "fromExpression": "3",
+                "defineVarInputWay": "directInputWay",
+                "varExplanation": "滤波核高度"
+            },
+            {
+              "varLabel": "阈值偏移量",
+              "varName": "deviation",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "阈值偏移量"
+          },
+          {
+            "varLabel": "比较类型",
+            "varName": "type",
+            "varType": "int",
+            "fromExpression": "0",
+            "defineVarInputWay": "selectedInputWay",
+            "comboList": {"大于等于":"0", "小于等于":"1", "等于":"2","不等于":"3"},
+            "varExplanation": "比较类型"
+           }
+          ],
+          "outPara": [
+            {
+              "varLabel": "均值二值化图像",
+              "varName": "dst",
+              "varType": "Mat",
+              "varExplanation": "均值二值化后的图像"
+            }
+          ]
+        },
+        {
+          "modelName": "高斯二值化",
+          "modelID": "gauss_threshold",
+          "helpMsg": "gauss_threshold help message",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "滤波核宽度",
+              "varName": "w",
+              "varType": "int",
+              "fromExpression": "3",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "滤波核宽度"
+            } ,
+            {
+                "varLabel": "滤波核高度",
+                "varName": "h",
+                "varType": "int",
+                "fromExpression": "3",
+                "defineVarInputWay": "directInputWay",
+                "varExplanation": "滤波核高度"
+            },
+            {
+              "varLabel": "阈值偏移量",
+              "varName": "deviation",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "阈值偏移量"
+          },
+          {
+            "varLabel": "高斯标准差X",
+            "varName": "X",
+            "varType": "int",
+            "fromExpression": "0",
+            "defineVarInputWay": "directInputWay",
+            "varExplanation": "X方向高斯标准差"
+        },
+        {
+          "varLabel": "高斯标准差Y",
+          "varName": "Y",
+          "varType": "int",
+          "fromExpression": "0",
+          "defineVarInputWay": "directInputWay",
+          "varExplanation": "Y方向高斯标准差"
+      },
+          {
+            "varLabel": "比较类型",
+            "varName": "type",
+            "varType": "int",
+            "fromExpression": "0",
+            "defineVarInputWay": "selectedInputWay",
+            "comboList": {"大于等于":"0", "小于等于":"1", "等于":"2","不等于":"3"},
+            "varExplanation": "比较类型"
+
+           }
+          ],
+          "outPara": [
+            {
+              "varLabel": "均值二值化图像",
+              "varName": "dst",
+              "varType": "Mat",
+              "varExplanation": "均值二值化后的图像"
+            }
+          ]
+        },
+
+        {
+          "modelName": "自动二值化",
+          "modelID": "ada_threshold",
+          "helpMsg": "threshold help message",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            }   
+          ],
+          "outPara": [
+            {
+              "varLabel": "自动二值化图像",
+              "varName": "dst",
+              "varType": "Mat",
+              "varExplanation": "自动二值化后的图像"
+            }
+          ]
+        }
+      ],
+
+          "outPara": [
+              {
+                "varLabel": "模块状态",
+                "varName": "status",
+                "varType": "int",
+                "currentDataFlag": true
+              },
+            {
+              "varLabel": "二值化图片",
+              "varName": "dst",
+              "varType": "GeliMat",
+              
+              "children": [
+                {
+                  "varLabel": "图像数据",
+                  "varName": "mat",
+                  "varType": "Mat"
+                },
+                {
+                  "varLabel": "图像宽度",
+                  "varName": "width",
+                  "varType": "int",
+                  "currentDataFlag": true
+                },
+                {
+                  "varLabel": "图像高度",
+                  "varName": "height",
+                  "varType": "int"
+                },
+                {
+                  "varLabel": "图像像素格式",
+                  "varName": "type",
+                  "varType": "int"
+                }
+              ]
+            },
+            {
+              "varLabel": "输出掩膜",
+              "varName": "mask",
+              "varType": "GeliMat",
+              "children": [
+                {
+                  "varLabel": "输出掩膜图像",
+                  "varName": "mat",
+                  "varType": "Mat"
+                },
+                {
+                  "varLabel": "输出掩膜宽度",
+                  "varName": "width",
+                  "varType": "int",
+                  "varExpression": ""
+                },
+                {
+                  "varLabel": "输出掩膜高度",
+                  "varName": "height",
+                  "varType": "int"
+                },
+                {
+                  "varLabel": "输出掩膜像素格式",
+                  "varName": "type",
+                  "varType": "int"
+                }
+              ]
+            }
+          ]
+        
+        },
+        {
+          "state": "init",
+          "superName": "图像处理",
+          "name": "形态学处理",
+          "roiUI": {
+            "type": ["rect", "circle", "polygon"]
+          },
+          "models": [
+            {"modelName": "腐蚀",
+            "dllPath": "resources/add/Erode.dll",
+            "modelID": "erode",
+            "helpMsg": "erode help message",
+            "inPara": [
+              {
+                "varLabel": "图像源",
+                "varName": "src",
+                "varType": "GeliMat",
+                "fromExpression": "",
+                "defineVarInputWay": "smartInputWay",
+                "comboList": {},
+                "varExplanation": ""
+              },
+              {
+                "varLabel": "形态学形状",
+                "varName": "type",
+                "varType": "int",
+                "fromExpression": "0",
+                "defineVarInputWay": "selectedInputWay",
+                "comboList": {"矩形":"0", "圆":"1", "十字":"2"},
+                "varExplanation": ""
+              },
+              {
+                "varLabel": "核高度",
+                "varName": "height",
+                "varType": "int",
+                "fromExpression": "3",
+                "defineVarInputWay": "directInputWay",
+                "comboList": {},
+                "varExplanation": ""
+              },
+              {
+               "varLabel": "核宽度",
+                "varName": "width",
+                "varType": "int",
+                "fromExpression": "3",
+                "defineVarInputWay": "directInputWay",
+                "comboList": {},
+                "varExplanation": ""
+              },
+              {
+                "varLabel": "迭代次数",
+                 "varName": "iteration",
+                 "varType": "int",
+                 "fromExpression": "1",
+                 "defineVarInputWay": "directInputWay",
+                 "comboList": {},
+                 "varExplanation": ""
+               }
+            ]
+          },
+
+          {"modelName": "膨胀",
+          "dllPath": "resources/add/Dilate.dll",
+          "modelID": "dilate",
+          "helpMsg": "dilate help message",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "形态学形状",
+              "varName": "type",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "selectedInputWay",
+              "comboList": {"矩形":"0", "圆":"1", "十字":"2"},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "核高度",
+              "varName": "height",
+              "varType": "int",
+              "fromExpression": "3",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+             "varLabel": "核宽度",
+              "varName": "width",
+              "varType": "int",
+              "fromExpression": "3",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "迭代次数",
+               "varName": "iteration",
+               "varType": "int",
+               "fromExpression": "1",
+               "defineVarInputWay": "directInputWay",
+               "comboList": {},
+               "varExplanation": ""
+             }
+          ]
+        },
+
+        {"modelName": "开",
+        "dllPath": "resources/add/performopen.dll",
+        "modelID": "performopen",
+        "helpMsg": "open help message",
+        "inPara": [
+          {
+            "varLabel": "图像源",
+            "varName": "src",
+            "varType": "GeliMat",
+            "fromExpression": "",
+            "defineVarInputWay": "smartInputWay",
+            "comboList": {},
+            "varExplanation": ""
+          },
+          {
+            "varLabel": "形态学形状",
+            "varName": "type",
+            "varType": "int",
+            "fromExpression": "0",
+            "defineVarInputWay": "selectedInputWay",
+            "comboList": {"矩形":"0", "圆":"1", "十字":"2"},
+            "varExplanation": ""
+          },
+          {
+            "varLabel": "核高度",
+            "varName": "height",
+            "varType": "int",
+            "fromExpression": "3",
+            "defineVarInputWay": "directInputWay",
+            "comboList": {},
+            "varExplanation": ""
+          },
+          {
+           "varLabel": "核宽度",
+            "varName": "width",
+            "varType": "int",
+            "fromExpression": "3",
+            "defineVarInputWay": "directInputWay",
+            "comboList": {},
+            "varExplanation": ""
+          },
+          {
+            "varLabel": "迭代次数",
+             "varName": "iteration",
+             "varType": "int",
+             "fromExpression": "1",
+             "defineVarInputWay": "directInputWay",
+             "comboList": {},
+             "varExplanation": ""
+           }
+        ]
+      },
+      
+      {"modelName": "闭",
+      "dllPath": "resources/add/performclose.dll",
+      "modelID": "performclose",
+      "helpMsg": "close help message",
+      "inPara": [
+        {
+          "varLabel": "图像源",
+          "varName": "src",
+          "varType": "GeliMat",
+          "fromExpression": "",
+          "defineVarInputWay": "smartInputWay",
+          "comboList": {},
+          "varExplanation": ""
+        },
+        {
+          "varLabel": "形态学形状",
+          "varName": "type",
+          "varType": "int",
+          "fromExpression": "0",
+          "defineVarInputWay": "selectedInputWay",
+          "comboList": {"矩形":"0", "圆":"1", "十字":"2"},
+          "varExplanation": ""
+        },
+        {
+          "varLabel": "核高度",
+          "varName": "height",
+          "varType": "int",
+          "fromExpression": "3",
+          "defineVarInputWay": "directInputWay",
+          "comboList": {},
+          "varExplanation": ""
+        },
+        {
+         "varLabel": "核宽度",
+          "varName": "width",
+          "varType": "int",
+          "fromExpression": "3",
+          "defineVarInputWay": "directInputWay",
+          "comboList": {},
+          "varExplanation": ""
+        },
+        {
+          "varLabel": "迭代次数",
+           "varName": "iteration",
+           "varType": "int",
+           "fromExpression": "1",
+           "defineVarInputWay": "directInputWay",
+           "comboList": {},
+           "varExplanation": ""
+         }
+      ]
+    }
+          ],
+    
+            "outPara": [
+              {
+                "varLabel": "模块状态",
+                "varName": "status",
+                "varType": "int",
+                "currentDataFlag": true
+              },
+              {
+                "varLabel": "形态学处理图片",
+                "varName": "dst",
+                "varType": "GeliMat",            
+                "children": [
+                  {
+                    "varLabel": "图像数据",
+                    "varName": "mat",
+                    "varType": "Mat"
+                  },
+                  {
+                    "varLabel": "图像宽度",
+                    "varName": "width",
+                    "varType": "int",
+                    "currentDataFlag": true
+                  },
+                  {
+                    "varLabel": "图像高度",
+                    "varName": "height",
+                    "varType": "int"
+                  },
+                  {
+                    "varLabel": "图像像素格式",
+                    "varName": "type",
+                    "varType": "int"
+                  }
+                ]
+              },
+              {
+                "varLabel": "输出掩膜",
+                "varName": "mask",
+                "varType": "GeliMat",
+                "children": [
+                  {
+                    "varLabel": "输出掩膜图像",
+                    "varName": "mat",
+                    "varType": "Mat"
+                  },
+                  {
+                    "varLabel": "输出掩膜宽度",
+                    "varName": "width",
+                    "varType": "int",
+                    "varExpression": ""
+                  },
+                  {
+                    "varLabel": "输出掩膜高度",
+                    "varName": "height",
+                    "varType": "int"
+                  },
+                  {
+                    "varLabel": "输出掩膜像素格式",
+                    "varName": "type",
+                    "varType": "int"
+                  }
+                ]
+              }
+            ]
+          },
+    {
+      "state": "init",
+      "superName": "图像处理",
+      "name": "伽马校正",
+      "roiUI": {
+        "type": ["rect", "circle", "polygon"]
+      },
+      "models": [
+        {"modelName": "伽马校正",
+        "dllPath": "resources/add/GammaCorrection.dll",
+        "modelID": "GammaCorrection",
+        "helpMsg": "GammaCorrection help message",
+        "inPara": [
+          {
+            "varLabel": "图像源",
+            "varName": "src",
+            "varType": "GeliMat",
+            "fromExpression": "",
+            "defineVarInputWay": "smartInputWay",
+            "comboList": {},
+            "varExplanation": ""
+          }
+        ]
+      }
+      ],
+        "outPara": [
+          {
+            "varLabel": "伽马校正图片",
+            "varName": "dst",
+            "varType": "GeliMat",
+            
+            "children": [
+              {
+                "varLabel": "图像数据",
+                "varName": "mat",
+                "varType": "Mat"
+              },
+              {
+                "varLabel": "图像宽度",
+                "varName": "width",
+                "varType": "int",
+                "currentDataFlag": true
+              },
+              {
+                "varLabel": "图像高度",
+                "varName": "height",
+                "varType": "int"
+              },
+              {
+                "varLabel": "图像像素格式",
+                "varName": "type",
+                "varType": "int"
+              }
+            ]
+          }
+        ]
+      },
+    {
+      "state": "init",
+      "superName": "图像处理",
+      "name": "颜色转换",
+      "dllPath": "resources/imgProc/color_convert.dll",
+      "models": [
+        {
+          "modelName": "RGB转灰度",
+          "helpMsg": "it is a help msg",
+          "modelID": "imageRGB2Gray",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "转换比例",
+              "varName": "covertType",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "selectedInputWay",
+              "comboList": {"通用转换比例":"0", 
+                            "平均转换比例":"1",
+                            "通道最小值":  "2",
+                            "通道最大值":  "3", 
+                            "自设转换比例":"4", 
+                            "R通道":      "5", 
+                            "G通道":      "6", 
+                            "B通道":      "7"},
+              "varExplanation": "转换比例"
+            },
+            {
+              "varLabel": "R转换比例",
+              "varName": "R_ratio",
+              "varType": "int",
+              "fromExpression": "1",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "R转换比例",
+              "low": 0,
+              "high": 100,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "G转换比例",
+              "varName": "G_ratio",
+              "varType": "int",
+              "fromExpression": "1",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "G转换比例",
+              "low": 1,
+              "high": 100,
+              "step": 1,
+              "precision" : 0 
+            },
+            {
+              "varLabel": "B转换比例",
+              "varName": "B_ratio",
+              "varType": "int",
+              "fromExpression": "1",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "B转换比例",
+              "low": 0,
+              "high": 100,
+              "step": 1,
+              "precision" : 0 
+            }
+          ]
+        },
+        {
+          "modelName": "RGB转HSV",
+          "modelID": "imageRGB2HSV",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "Mat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "显示通道",
+              "varName": "showChannel",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "selectedInputWay",
+              "comboList": {"第一通道":"0", 
+                            "第二通道":"1",
+                            "第三通道":"2"},
+              "varExplanation": "显示通道"
+            }
+          ]
+        },
+        {
+          "modelName": "RGB转HSI",
+          "modelID": "imageRGB2HSI",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "Mat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "显示通道",
+              "varName": "showChannel",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "selectedInputWay",
+              "comboList": {"第一通道":"0", 
+                            "第二通道":"1",
+                            "第三通道":"2"},
+              "varExplanation": "显示通道"
+            }
+          ]
+        },
+        {
+          "modelName": "RGB转YUV",
+          "modelID": "imageRGB2YUV",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "Mat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "显示通道",
+              "varName": "showChannel",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "selectedInputWay",
+              "comboList": {"第一通道":"0", 
+                            "第二通道":"1",
+                            "第三通道":"2"},
+              "varExplanation": "显示通道"
+            }
+          ]
+        }
+      ],
+      "outPara": [
+        {
+          "varLabel": "模块状态",
+          "varName": "status",
+          "varType": "int",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "输出图像",
+          "varName": "img",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "输出图像数据",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出图像宽度",
+              "varName": "width",
+              "varType": "int",
+              "currentDataFlag": true
+            },
+            {
+              "varLabel": "输出图像高度",
+              "varName": "height",
+              "varType": "int",
+              "currentDataFlag": true
+            },
+            {
+              "varLabel": "输出图像像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "图像采集": [
+    {
+      "state": "init",
+      "superName": "图像采集",
+      "name": "图像源",
+      "dllPath": "",
+      "models": [
+        {
+          "modelName": "本地图像",
+          "helpMsg": "it is a help message",
+          "modelID": "LocalImg",
+          "inPara": []
+        },
+        {
+          "modelName": "相机",
+          "helpMsg": "it is a help message of camera",
+          "modelID": "camera",
+          "inPara": [
+            {
+              "varLabel": "选择相机",
+              "varName": "cameraID",
+              "varType": "int",
+              "fromExpression": "",
+              "defineVarInputWay": "selectedInputWay",
+              "varExplanation": ""
+            }
+          ]
+        }
+      ],
+      "outPara": [
+        {
+          "varLabel": "图像",
+          "varName": "img",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "图像数据",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "图像宽度",
+              "varName": "width",
+              "varType": "int",
+              "currentDataFlag": true
+            },
+            {
+              "varLabel": "图像高度",
+              "varName": "height",
+              "varType": "int",
+              "currentDataFlag": true
+            },
+            {
+              "varLabel": "图像像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "图像测量": [
+    {
+      "state": "init",
+      "superName": "测量",
+      "name": "直方图工具",
+      "dllPath": "resources/general.dll",
+      "roiUI": {
+        "type": ["rect", "circle", "polygon", "lineCaliper", "circleCaliper"]
+      },
+      "resultShowUI": {
+        "结果判断": [],
+        "图像显示": [
+          {
+            "label": "检测区域",
+            "param": "detect_area"
+          },
+          {
+            "label": "扇环检测区域",
+            "param": "roi_circle"
+          }
+        ],
+        "文本显示": []
+      },
+      "models": [
+        {
+          "modelName": "直方图工具",
+          "helpMsg": "it is a help msg",
+          "modelID": "hist_statistics",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            }
+          ]
+        }
+      ],
+      "outPara": [
+        {
+          "varLabel": "模块状态",
+          "varName": "state",
+          "varType": "int",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "输出图像",
+          "varName": "img",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "数量",
+              "varName": "number",
+              "varType": "int",
+              "currentDataFlag": true
+            },
+            {
+              "varLabel": "均值",
+              "varName": "mean",
+              "varType": "GeliScalar"
+            },
+            {
+              "varLabel": "最小值",
+              "varName": "min",
+              "varType": "int"
+            },
+            {
+              "varLabel": "最大值",
+              "varName": "max",
+              "varType": "int"
+            },
+            {
+              "varLabel": "峰值",
+              "varName": "max_val",
+              "varType": "int"
+            },
+            {
+              "varLabel": "标准差",
+              "varName": "stddev",
+              "varType": "GeliScalar"
+            },
+            {
+              "varLabel": "对比度",
+              "varName": "contrast",
+              "varType": "double"
+            }
+          ]
+        },
+        {
+          "varLabel": "输出掩膜",
+          "varName": "mask",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "输出掩膜图像",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出掩膜宽度",
+              "varName": "width",
+              "varType": "int",
+              "varExpression": ""
+            },
+            {
+              "varLabel": "输出掩膜高度",
+              "varName": "height",
+              "varType": "int"
+            },
+            {
+              "varLabel": "输出掩膜像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        },
+        {
+          "varLabel": "检测区域",
+          "varName": "detect_area",
+          "varType": "GeliRect",
+          "children": [
+            {
+              "varLabel": "检测区域中心点",
+              "varName": "center",
+              "varType": "GeliPoint",
+              "children": [
+                {
+                  "varLabel": "检测区域中心点X",
+                  "varName": "x",
+                  "varType": "double"
+                },
+                {
+                  "varLabel": "检测区域中心点Y",
+                  "varName": "y",
+                  "varType": "double"
+                }
+              ]
+            },
+            {
+              "varLabel": "检测区域宽度",
+              "varName": "width",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域高度",
+              "varName": "height",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域角度",
+              "varName": "angle",
+              "varType": "double"
+            }
+          ]
+        },
+        {
+          "varLabel": "ROI圆弧",
+          "varName": "roi_circle",
+          "varType": "GeliCircle",
+          "children": [
+            {
+              "varLabel": "检测圆弧中心点",
+              "varName": "center",
+              "varType": "GeliPoint",
+              "children": [
+                {
+                  "varLabel": "检测圆弧中心点X",
+                  "varName": "x",
+                  "varType": "double"
+                },
+                {
+                  "varLabel": "检测圆弧中心点Y",
+                  "varName": "y",
+                  "varType": "double"
+                }
+              ]
+            },
+            {
+              "varLabel": "检测圆弧内径",
+              "varName": "dI",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测圆弧外径",
+              "varName": "dO",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测圆弧起始角度",
+              "varName": "angleStart",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测圆弧角度范围",
+              "varName": "angleRange",
+              "varType": "double"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "state": "init",
+      "superName": "图像测量",
+      "name": "亮度测量",
+      "dllPath": "resources/BrightnessMeasurement.dll",
+      "roiUI": {
+        "type": ["rect", "circle", "polygon"]
+      },
+      "resultShowUI": {
+        "结果判断": [
+          {
+            "label": "拟合点判断",
+            "param": "img.width",
+            "type": "double"
+          }
+        ],
+        "图像显示": [
+          {
+            "label": "检测区域",
+            "param": "detect_area"
+          },
+          {
+            "label": "屏蔽区多边形",
+            "param": "mask"
+          },
+          {
+            "label": "扇环检测区域",
+            "param": "roi_circle"
+          }
+        ],
+        "文本显示": []
+      },
+      "outPara": [
+        {
+          "varLabel": "模块状态",
+          "varName": "status",
+          "varType": "int",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "最小值",
+          "varName": "minimumValue",
+          "varType": "double",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "最大值",
+          "varName": "maximumValue",
+          "varType": "double",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "均值",
+          "varName": "meanValue",
+          "varType": "double",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "标准差",
+          "varName": "standardDeviation",
+          "varType": "double",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "对比度",
+          "varName": "contrast",
+          "varType": "double",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "检测区域",
+          "varName": "detect_area",
+          "varType": "GeliRect",
+          "children": [
+            {
+              "varLabel": "检测区域中心点",
+              "varName": "center",
+              "varType": "GeliPoint",
+              "children": [
+                {
+                  "varLabel": "检测区域中心点X",
+                  "varName": "x",
+                  "varType": "double"
+                },
+                {
+                  "varLabel": "检测区域中心点Y",
+                  "varName": "y",
+                  "varType": "double"
+                }
+              ]
+            },
+            {
+              "varLabel": "检测区域宽度",
+              "varName": "width",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域高度",
+              "varName": "height",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域角度",
+              "varName": "angle",
+              "varType": "double"
+            }
+          ]
+        },
+        {
+          "varLabel": "ROI圆弧",
+          "varName": "roi_circle",
+          "varType": "GeliCircle",
+          "children": [
+            {
+              "varLabel": "检测圆弧中心点",
+              "varName": "center",
+              "varType": "GeliPoint",
+              "children": [
+                {
+                  "varLabel": "检测圆弧中心点X",
+                  "varName": "x",
+                  "varType": "double"
+                },
+                {
+                  "varLabel": "检测圆弧中心点Y",
+                  "varName": "y",
+                  "varType": "double"
+                }
+              ]
+            },
+            {
+              "varLabel": "检测圆弧内径",
+              "varName": "dI",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测圆弧外径",
+              "varName": "dO",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测圆弧起始角度",
+              "varName": "angleStart",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测圆弧角度范围",
+              "varName": "angleRange",
+              "varType": "double"
+            }
+          ]
+        }
+      ],
+      "models": [
+        {
+          "modelName": "亮度测量",
+          "helpMsg": "it is a help msg of model1",
+          "modelID": "measureBrightness",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "近邻粒度",
+              "varName": "neighbor",
+              "varType": "int",
+              "fromExpression": "4",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "深度学习": [
+    {
+      "state": "init",
+      "superName": "深度学习",
+      "name": "贴纸电极区域计算",
+      "dllPath": "resources/",
+      "roiUI": {
+        "type": ["rect", "circle", "polygon"]
+      },
+      "resultShowUI": {
+        "结果判断": [
+          {
+            "label": "拟合点判断",
+            "param": "img.width",
+            "type": "double"
+          }
+        ],
+        "图像显示": [
+          {
+            "label": "检测区域",
+            "param": "detect_area"
+          },
+          {
+            "label": "屏蔽区多边形",
+            "param": "mask"
+          },
+          {
+            "label": "扇环检测区域",
+            "param": "roi_circle"
+          }
+        ],
+        "文本显示": []
+      },
+      "models": [
+        {
+          "modelName": "position-detect",
+          "helpMsg": "it is a help message of GlobalVariable",
+          "dllPath": "getPosition.dll",
+          "modelID": "getPosition",
+          "inPara": [
+            {
+              "varLabel": "贴纸区域",
+              "varName": "r1",
+              "varType": "vector<GeliRect>",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "电极区域",
+              "varName": "r2",
+              "varType": "vector<GeliRect>",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "varExplanation": ""
+            }
+          ],
+          "outPara": [
+            {
+              "varLabel": "待添加",
+              "varName": "dst",
+              "varType": "GeliRect",
+              "varExplanation": ""
+            }
+          ]
+        }
+      ],
+      "outPara": [
+        {
+          "varLabel": "模块状态",
+          "varName": "state",
+          "varType": "int",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "输出图像",
+          "varName": "img",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "数量",
+              "varName": "number",
+              "varType": "int",
+              "currentDataFlag": true
+            },
+            {
+              "varLabel": "均值",
+              "varName": "mean",
+              "varType": "GeliScalar"
+            },
+            {
+              "varLabel": "最小值",
+              "varName": "min",
+              "varType": "int"
+            },
+            {
+              "varLabel": "最大值",
+              "varName": "max",
+              "varType": "int"
+            },
+            {
+              "varLabel": "峰值",
+              "varName": "max_val",
+              "varType": "int"
+            },
+            {
+              "varLabel": "标准差",
+              "varName": "stddev",
+              "varType": "GeliScalar"
+            },
+            {
+              "varLabel": "对比度",
+              "varName": "contrast",
+              "varType": "double"
+            }
+          ]
+        },
+        {
+          "varLabel": "输出掩膜",
+          "varName": "mask",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "输出掩膜图像",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出掩膜宽度",
+              "varName": "width",
+              "varType": "int",
+              "varExpression": ""
+            },
+            {
+              "varLabel": "输出掩膜高度",
+              "varName": "height",
+              "varType": "int"
+            },
+            {
+              "varLabel": "输出掩膜像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        },
+        {
+          "varLabel": "检测区域",
+          "varName": "detect_area",
+          "varType": "GeliRect",
+          "children": [
+            {
+              "varLabel": "检测区域中心点",
+              "varName": "center",
+              "varType": "GeliPoint",
+              "children": [
+                {
+                  "varLabel": "检测区域中心点X",
+                  "varName": "x",
+                  "varType": "double"
+                },
+                {
+                  "varLabel": "检测区域中心点Y",
+                  "varName": "y",
+                  "varType": "double"
+                }
+              ]
+            },
+            {
+              "varLabel": "检测区域宽度",
+              "varName": "width",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域高度",
+              "varName": "height",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域角度",
+              "varName": "angle",
+              "varType": "double"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "state": "init",
+      "superName": "深度学习",
+      "name": "目标检测",
+      "dllPath": "resources/",
+      "roiUI": {
+        "type": ["rect", "circle", "polygon"]
+      },
+      "resultShowUI": {
+        "结果判断": [
+          {
+            "label": "拟合点判断",
+            "param": "img.width",
+            "type": "double"
+          }
+        ],
+        "图像显示": [
+          {
+            "label": "检测区域",
+            "param": "detect_area"
+          },
+          {
+            "label": "屏蔽区多边形",
+            "param": "mask"
+          },
+          {
+            "label": "扇环检测区域",
+            "param": "roi_circle"
+          }
+        ],
+        "文本显示": []
+      },
+      "models": [
+        {
+          "modelName": "new_field_detect",
+          "helpMsg": "it is a help message of GlobalVariable",
+          "dllPath": "detectField.dll",
+          "modelID": "detectField",
+          "inPara": [
+            {
+              "varLabel": "待添加",
+              "varName": "srcimg",
+              "varType": "Mat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "待添加",
+              "varName": "sticker_path",
+              "varType": "string",
+              "fromExpression": "",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": ""
+            }
+          ]
+        }
+      ],
+      "outPara": [
+        {
+          "varLabel": "模块状态",
+          "varName": "state",
+          "varType": "int",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "输出图像",
+          "varName": "img",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "数量",
+              "varName": "number",
+              "varType": "int",
+              "currentDataFlag": true
+            },
+            {
+              "varLabel": "均值",
+              "varName": "mean",
+              "varType": "GeliScalar"
+            },
+            {
+              "varLabel": "最小值",
+              "varName": "min",
+              "varType": "int"
+            },
+            {
+              "varLabel": "最大值",
+              "varName": "max",
+              "varType": "int"
+            },
+            {
+              "varLabel": "峰值",
+              "varName": "max_val",
+              "varType": "int"
+            },
+            {
+              "varLabel": "标准差",
+              "varName": "stddev",
+              "varType": "GeliScalar"
+            },
+            {
+              "varLabel": "对比度",
+              "varName": "contrast",
+              "varType": "double"
+            }
+          ]
+        },
+        {
+          "varLabel": "输出掩膜",
+          "varName": "mask",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "输出掩膜图像",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出掩膜宽度",
+              "varName": "width",
+              "varType": "int",
+              "varExpression": ""
+            },
+            {
+              "varLabel": "输出掩膜高度",
+              "varName": "height",
+              "varType": "int"
+            },
+            {
+              "varLabel": "输出掩膜像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        },
+        {
+          "varLabel": "检测区域",
+          "varName": "detect_area",
+          "varType": "GeliRect",
+          "children": [
+            {
+              "varLabel": "检测区域中心点",
+              "varName": "center",
+              "varType": "GeliPoint",
+              "children": [
+                {
+                  "varLabel": "检测区域中心点X",
+                  "varName": "x",
+                  "varType": "double"
+                },
+                {
+                  "varLabel": "检测区域中心点Y",
+                  "varName": "y",
+                  "varType": "double"
+                }
+              ]
+            },
+            {
+              "varLabel": "检测区域宽度",
+              "varName": "width",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域高度",
+              "varName": "height",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域角度",
+              "varName": "angle",
+              "varType": "double"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "逻辑控制": [
+    {
+      "state": "init",
+      "superName": "逻辑控制",
+      "name": "协议组装",
+      "dllPath": "",
+      "models": [
+        {
+          "modelName": "协议组装",
+          "helpMsg": "it is a help message",
+          "modelID": "protocol_assemble",
+          "inPara": [
+            {
+              "varLabel": "分隔符",
+              "varName": "delimiter",
+              "varType": "string",
+              "fromExpression": "",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": ""
+            }
+          ]
+        }
+      ],
+      "outPara": [
+        {
+          "varLabel": "模块状态",
+          "varName": "state",
+          "varType": "int",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "组装结果",
+          "varName": "ret",
+          "varType": "string",
+          "currentDataFlag": true
+        }
+      ]
+    }
+  ],
+  "通信": [
+    {
+      "state": "init",
+      "superName": "通信",
+      "name": "接收数据",
+      "dllPath": "",
+      "models": [
+        {
+          "modelName": "接收数据",
+          "helpMsg": "it is a help message",
+          "dllName": "",
+          "modelID": "myInputData",
+          "inPara": [
+            {
+              "varLabel": "数据源",
+              "varName": "数据源",
+              "varType": "int",
+              "fromExpression": "1",
+              "defineVarInputWay": "selectedInputWay",
+              "comboList": {
+                "通信设备": "1",
+                "全局变量": "2"
+              },
+              "varExplanation": ""
+            }
+          ]
+        }
+      ],
+      "outPara": [
+        {
+          "varLabel": "模块状态",
+          "varName": "status",
+          "varType": "int",
+          "currentDataFlag": true
+        }
+      ]
+    },
+    {
+      "state": "init",
+      "superName": "通信",
+      "name": "发送数据",
+      "dllPath": "",
+      "models": [
+        {
+          "modelName": "发送数据",
+          "helpMsg": "it is a help message",
+          "modelID": "myOutputData",
+          "inPara": [
+            {
+              "varLabel": "输出源",
+              "varName": "输出源",
+              "varType": "int",
+              "fromExpression": "1",
+              "defineVarInputWay": "selectedInputWay",
+              "comboList": {
+                "通信设备": "1",
+                "全局变量": "2",
+                "发送事件": "3"
+              },
+              "varExplanation": ""
+            }
+          ]
+        }
+      ],
+      "outPara": [
+        {
+          "varLabel": "模块状态",
+          "varName": "status",
+          "varType": "int",
+          "currentDataFlag": true
+        }
+      ]
+    }
+  ],
+  "图像标定": [
+    {
+      "state": "init",
+      "superName": "图像标定",
+      "name": "棋盘格标定",
+      "dllPath": "resources/chessboardCalibrate.dll",
+      "models": [
+        {
+          "modelName": "棋盘格标定",
+          "helpMsg": "it is a help message",
+          "modelID": "chessboard_calibrate",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "原点x",
+              "varName": "x",
+              "varType": "double",
+              "fromExpression": "0.0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "原点x",
+              "low": 0.0,
+              "high": 10.0,
+              "step": 0.5,
+              "precision": 1
+            },
+            {
+              "varLabel": "原点y",
+              "varName": "y",
+              "varType": "double",
+              "fromExpression": "0.0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "原点y",
+              "low": 0.0,
+              "high": 10.0,
+              "step": 0.5,
+              "precision": 1
+            },
+            {
+              "varLabel": "物理尺寸",
+              "varName": "squareSize",
+              "varType": "double",
+              "fromExpression": "1.0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "物理尺寸",
+              "low": 0.0,
+              "high": 10.0,
+              "step": 0.5,
+              "precision": 1
+            },
+            {
+              "varLabel": "标定文件名",
+              "varName": "fileName",
+              "varType": "string",
+              "fromExpression": "default",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "标定文件名"
+            }
+          ]
+        }
+      ],
+      "outPara": [
+        {
+          "varLabel": "模块状态",
+          "varName": "status",
+          "varType": "int",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "结果图像",
+          "varName": "dst",
+          "varType": "GeliMat",
+          "varExplanation": "",
+          "children": [
+            {
+              "varLabel": "输出图像数据",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出图像宽度",
+              "varName": "width",
+              "varType": "int",
+              "currentDataFlag": true
+            },
+            {
+              "varLabel": "输出图像高度",
+              "varName": "height",
+              "varType": "int",
+              "currentDataFlag": true
+            },
+            {
+              "varLabel": "输出图像像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        },
+        {
+          "varLabel": "标定误差",
+          "varName": "reprojectionError",
+          "varType": "double",
+          "varExplanation": "标定误差"
+        },
+        {
+          "varLabel": "尺度",
+          "varName": "scale",
+          "varType": "double",
+          "varExplanation": "尺度"
+        },
+        {
+          "varLabel": "像素精度",
+          "varName": "pixelAccuracy",
+          "varType": "double",
+          "varExplanation": "像素精度"
+        },
+        {
+          "varLabel": "标定点数",
+          "varName": "calibrationPoints",
+          "varType": "int",
+          "varExplanation": "标定点数"
+        },
+        {
+          "varLabel": "平移x",
+          "varName": "translateX",
+          "varType": "double",
+          "varExplanation": "平移x"
+        },
+        {
+          "varLabel": "平移y",
+          "varName": "translateY",
+          "varType": "double",
+          "varExplanation": "平移y"
+        }
+      ]
+    }
+  ],
+  "颜色处理" : [
+    {
+      "state": "init",
+      "superName": "颜色处理",
+      "name": "颜色识别",
+      "dllPath": "resources/myColorIdentificaion.dll",
+      "models": [
+        {
+          "modelName": "颜色识别",
+          "helpMsg": "it is a help message",       
+          "modelID": "myColorIdentif",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "varExplanation": ""
+            }
+          ]
+        }
+      ],
+      "outPara": [
+        {
+          "varLabel": "模块状态",
+          "varName": "status",
+          "varType": "int",
+          "currentDataFlag": true
+        },
+            {
+              "varLabel": "结果",
+              "varName": "ans",
+              "varType": "string",
+              "varExplanation": ""
+            }
+          ]
+    }
+  ],
+  "运算": [
+    {
+      "state": "init",
+      "superName": "运算",
+      "name": "单位转换",
+      "dllPath": "",
+
+      "models": [
+        {
+          "modelName": "单位转换",
+          "helpMsg": "it is a help message",
+          "modelID": "unit_conversion",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "像素间距",
+              "varName": "pixelPitch",
+              "varType": "double",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "varExplanation": "像素间距"
+            },
+            {
+              "varLabel": "像素当量修正",
+              "varName": "PixelEquivalentCorrection",
+              "varType": "double",
+              "fromExpression": "0.0",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "物理尺寸",
+              "low": 0.0,
+              "high": 20.0,
+              "step": 0.5,
+              "precision": 1
+            },
+            {
+              "varLabel": "标定文件路径",
+              "varName": "calibrationFilePath",
+              "varType": "string",
+              "fromExpression": "",
+              "defineVarInputWay": "directInputWay",
+              "varExplanation": "标定文件"
+            }
+          ]
+        }
+      ],
+      "outPara": [
+        {
+          "varLabel": "模块状态",
+          "varName": "status",
+          "varType": "int",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "转换结果",
+          "varName": "result",
+          "varType": "double",
+          "varExplanation": "转换结果"
+        },
+        {
+          "varLabel": "单像素精度",
+          "varName": "pixelAccuracy",
+          "varType": "double",
+          "varExplanation": "单像素精度"
+        },
+        {
+          "varLabel": "平移x",
+          "varName": "translateX",
+          "varType": "double",
+          "varExplanation": "平移x"
+        },
+        {
+          "varLabel": "平移y",
+          "varName": "translateY",
+          "varType": "double",
+          "varExplanation": "平移y"
+        },
+        {
+          "varLabel": "尺度",
+          "varName": "scale",
+          "varType": "double",
+          "varExplanation": "尺度"
+        }
+      ]
+    }
+  ],
+  "样例": [
+    {
+      "state": "init",
+      "superName": "样例",
+      "name": "example",
+      "dllPath": "",
+      "template": {},
+      "roiUI": {
+        "type": [
+          "rect",
+          "circle",
+          "arc",
+          "polygon",
+          "lineCaliper",
+          "circleCaliper",
+          "arcCaliper",
+          "polygonLineCaliper"
+        ]
+      },
+      "resultShowUI": {
+        "结果判断": [
+          {
+            "label": "检测区域宽度判断",
+            "param": "detect_area.width",
+            "type": "double"
+          }
+        ],
+        "图像显示": [
+          {
+            "label": "检测区域",
+            "param": "detect_area"
+          }
+        ],
+        "文本显示": []
+      },
+      "outPara": [
+        {
+          "varLabel": "整数1",
+          "varName": "a",
+          "varType": "int",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "整数2",
+          "varName": "b",
+          "varType": "int",
+          "currentDataFlag": true
+        }
+      ],
+      "models": [
+        {
+          "modelName": "model1",
+          "helpMsg": "it is a help msg of model1",
+          "modelID": "crash_test",
+          "inPara": [
+            {
+              "varLabel": "in1",
+              "varName": "a1",
+              "varType": "int",
+              "fromExpression": "5",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "",
+              "low": 3,
+              "high": 255,
+              "step": 2,
+              "precision": 0
+            },
+            {
+              "varLabel": "in2",
+              "varName": "a2",
+              "varType": "int",
+              "fromExpression": "7",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "",
+              "low": 0,
+              "high": 100,
+              "step": 1,
+              "precision": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "crash": [
+    {
+      "state": "init",
+      "superName": "crash",
+      "name": "仿射变换_carsh",
+      "dllPath": "resources/test/zwq.dll",
+      "roiUI": {
+        "type": ["rect"]
+      },
+      "models": [
+        {
+          "modelName": "裁剪缩放",
+          "modelID": "imageCropZoom",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "尺度",
+              "varName": "scale",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "尺度缩放",
+              "low": 0.1,
+              "high": 10.0,
+              "step": 0.1,
+              "precision": 2
+            },
+            {
+              "varLabel": "宽高比",
+              "varName": "aspectRatio",
+              "varType": "double",
+              "fromExpression": "1.00",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "图像的宽高比",
+              "low": 0.1,
+              "high": 2.0,
+              "step": 0.1,
+              "precision": 2
+            },
+            {
+              "varLabel": "插值方法",
+              "varName": "interplateMethod",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "selectedInputWay",
+              "comboList": { "最近邻": "0", "双线性": "1" },
+              "varExplanation": "插值方法"
+            },
+            {
+              "varLabel": "填充方式",
+              "varName": "borderType",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "selectedInputWay",
+              "comboList": { "常数": "0", "邻近复制": "1" },
+              "varExplanation": "填充方式"
+            },
+            {
+              "varLabel": "锁定输出尺寸",
+              "varName": "lockOutputSize",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "selectedInputWay",
+              "comboList": { "否": "0", "是": "1" },
+              "varExplanation": "锁定输出尺寸"
+            },
+            {
+              "varLabel": "宽度",
+              "varName": "outputWidth",
+              "varType": "int",
+              "fromExpression": "10",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "宽度",
+              "low": 10,
+              "high": 30000,
+              "step": 1,
+              "precision": 0
+            },
+            {
+              "varLabel": "高度",
+              "varName": "outputHeight",
+              "varType": "int",
+              "fromExpression": "10",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "高度",
+              "low": 10,
+              "high": 30000,
+              "step": 1,
+              "precision": 0
+            },
+            {
+              "varLabel": "填充值",
+              "varName": "borderConstantValue",
+              "varType": "int",
+              "fromExpression": "0",
+              "defineVarInputWay": "directInputWay",
+              "comboList": {},
+              "varExplanation": "填充值",
+              "low": 0,
+              "high": 255,
+              "step": 1,
+              "precision": 0
+            }
+          ]
+        },
+        {
+          "modelName": "镜像",
+          "modelID": "crash_test",
+          "helpMsg": "msg",
+          "inPara": [
+            {
+              "varLabel": "图像源",
+              "varName": "src",
+              "varType": "GeliMat",
+              "fromExpression": "",
+              "defineVarInputWay": "smartInputWay",
+              "comboList": {},
+              "varExplanation": ""
+            },
+            {
+              "varLabel": "镜像方向",
+              "varName": "direction",
+              "varType": "int",
+              "fromExpression": "1",
+              "defineVarInputWay": "selectedInputWay",
+              "comboList": { "水平": "1", "垂直": "0", "水平垂直": "-1" },
+              "varExplanation": "镜像方向"
+            }
+          ]
+        }
+      ],
+      "outPara": [
+        {
+          "varLabel": "模块状态",
+          "varName": "status",
+          "varType": "int",
+          "currentDataFlag": true
+        },
+        {
+          "varLabel": "输出图像",
+          "varName": "img",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "输出图像数据",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出图像宽度",
+              "varName": "width",
+              "varType": "int",
+              "currentDataFlag": true
+            },
+            {
+              "varLabel": "输出图像高度",
+              "varName": "height",
+              "varType": "int"
+            },
+            {
+              "varLabel": "输出图像像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        },
+        {
+          "varLabel": "输出掩膜",
+          "varName": "mask",
+          "varType": "GeliMat",
+          "children": [
+            {
+              "varLabel": "输出掩膜图像",
+              "varName": "mat",
+              "varType": "Mat"
+            },
+            {
+              "varLabel": "输出掩膜宽度",
+              "varName": "width",
+              "varType": "int",
+              "varExpression": ""
+            },
+            {
+              "varLabel": "输出掩膜高度",
+              "varName": "height",
+              "varType": "int"
+            },
+            {
+              "varLabel": "输出掩膜像素格式",
+              "varName": "type",
+              "varType": "int"
+            }
+          ]
+        },
+        {
+          "varLabel": "检测区域",
+          "varName": "detect_area",
+          "varType": "GeliRect",
+          "children": [
+            {
+              "varLabel": "检测区域中心点",
+              "varName": "center",
+              "varType": "GeliPoint",
+              "children": [
+                {
+                  "varLabel": "检测区域中心点X",
+                  "varName": "x",
+                  "varType": "double"
+                },
+                {
+                  "varLabel": "检测区域中心点Y",
+                  "varName": "y",
+                  "varType": "double"
+                }
+              ]
+            },
+            {
+              "varLabel": "检测区域宽度",
+              "varName": "width",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域高度",
+              "varName": "height",
+              "varType": "double"
+            },
+            {
+              "varLabel": "检测区域角度",
+              "varName": "angle",
+              "varType": "double"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

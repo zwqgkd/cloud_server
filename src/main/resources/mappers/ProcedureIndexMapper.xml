@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cloud.mapper.Procedure_indexMapper">
+  <resultMap id="BaseResultMap" type="com.example.cloud.model.Procedure_index">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="procedureName" jdbcType="VARCHAR" property="procedurename" />
+    <result column="directoryName" jdbcType="VARCHAR" property="directoryname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, procedureName, directoryName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from procedure_index
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllProcedureIndex" resultType="com.example.cloud.model.Procedure_index">
+    SELECT * FROM procedure_index
+  </select>
+  <select id="selectDirectoryNameByProcedureName" resultType="java.lang.String">
+    SELECT directoryname FROM procedure_index WHERE procedurename = #{procedureName}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from procedure_index
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.cloud.model.Procedure_index">
+    insert into procedure_index (ID, procedureName, directoryName
+      )
+    values (#{id,jdbcType=INTEGER}, #{procedurename,jdbcType=VARCHAR}, #{directoryname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.cloud.model.Procedure_index">
+    insert into procedure_index
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="procedurename != null">
+        procedureName,
+      </if>
+      <if test="directoryname != null">
+        directoryName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="procedurename != null">
+        #{procedurename,jdbcType=VARCHAR},
+      </if>
+      <if test="directoryname != null">
+        #{directoryname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.cloud.model.Procedure_index">
+    update procedure_index
+    <set>
+      <if test="procedurename != null">
+        procedureName = #{procedurename,jdbcType=VARCHAR},
+      </if>
+      <if test="directoryname != null">
+        directoryName = #{directoryname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.cloud.model.Procedure_index">
+    update procedure_index
+    set procedureName = #{procedurename,jdbcType=VARCHAR},
+      directoryName = #{directoryname,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

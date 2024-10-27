@@ -1,0 +1,23 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: cloud_server
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cloud_server?userUnicode=true&characterEncoding=UtF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: root
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true # 开启驼峰命名
+  type-aliases-package: com.green.cloud.entity  # 指定实体类包
+  # mapper-locations: classpath:mappers/*.xml # 指定mapper文件位置
+

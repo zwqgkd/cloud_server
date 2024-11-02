@@ -23,7 +23,7 @@ services:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: cloud
     volumes:
-      - ./cloud_init.sql:/docker-entrypoint-initdb.d/cloud_init.sql
+      - ./cloud_server.sql:/docker-entrypoint-initdb.d/cloud_server.sql
       - mysql_data:/var/lib/mysql
   
   redis:

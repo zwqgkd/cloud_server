@@ -1,19 +1,24 @@
 package com.green.cloud.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.lang.generator.UUIDGenerator;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.green.cloud.common.Result;
 import com.green.cloud.common.UserHolder;
+import com.green.cloud.entity.Role;
 import com.green.cloud.entity.UserAuth;
 import com.green.cloud.mapper.RoleMapper;
 import com.green.cloud.mapper.UserMapper;
 import com.green.cloud.entity.User;
+import com.green.cloud.service.IRoleService;
 import com.green.cloud.service.IUserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
@@ -21,7 +26,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private UserMapper userMapper;
 
     @Autowired
-    private RoleMapper roleMapper;
+    private IRoleService roleService;
+
+
 
     public boolean  getByEmailAndPassword(String email, String password) {
         return userMapper.getByEmailAndPassword(email, password) != null;
@@ -33,7 +40,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
 
     @Override
-    public Result login(String email, String password) {
+    public Result login(String email, String password, HttpSession session) {
 
         User user = query().eq("email", email).one();
         if (user == null){
@@ -46,10 +53,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
         UserAuth userAuth = new UserAuth();
         BeanUtil.copyProperties(user, userAuth);
+        Role role = roleService.getById(user.getRoleId());
+        userAuth.setRole(role.getRole());
+
+        String token = UUID.randomUUID().toString();
+        userAuth.setToken(token);
+        session.setAttribute(token, userAuth);
 
         UserHolder.saveUser(userAuth);
 
-        // 登录成功应该返回token
+        // 登录成功应该返回token和用户基本信息
         return Result.ok("登录成功", userAuth);
     }
 

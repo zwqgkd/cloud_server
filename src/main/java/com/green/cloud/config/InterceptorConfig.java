@@ -1,6 +1,6 @@
 package com.green.cloud.config;
 
-import com.green.cloud.Interceptor.UserDtoInterceptor;
+import com.green.cloud.Interceptor.TokenInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -19,21 +19,27 @@ public class InterceptorConfig implements WebMvcConfigurer {
 //
 //    }
 
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("*")
-                .allowedMethods("GET", "POST", "PUT", "DELETE");
-    }
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**") // 对所有路径应用跨域设置
+//                .allowedOriginPatterns("*") // 允许所有来源
+//                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // 允许的HTTP方法
+//                .allowedHeaders("*") // 允许所有头部
+//
+//                .allowCredentials(true); // 允许发送Cookie
+//
+//
+//        // exposedHeaders("token")  暴露的响应中的头部给前端，例如用于前端获取认证信息
+//    }
 
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(new UserDtoInterceptor())
-//                .addPathPatterns("/**")
-//                .excludePathPatterns(
-//                        "/user/login",
-//                        "/user/register"
-//                );
+        registry.addInterceptor(new TokenInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns(
+                        "/user/login",
+                        "/user/register"
+                );
     }
 }

@@ -10,10 +10,7 @@ spring:
     username: root
     password: root
 
-  data:
-    redis:
-      host: localhost
-      port: 6379
+
 
 mybatis-plus:
   configuration:
@@ -21,3 +18,5 @@ mybatis-plus:
   type-aliases-package: com.green.cloud.entity  # 指定实体类包
   # mapper-locations: classpath:mappers/*.xml # 指定mapper文件位置
 
+self-def:
+  upload-base-path: 'C:\\'

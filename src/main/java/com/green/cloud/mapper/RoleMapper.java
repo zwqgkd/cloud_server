@@ -19,7 +19,7 @@ public interface RoleMapper extends BaseMapper<Role> {
 
 
     @Select("select permission_id from tb_role_permission where role_id = #{roleId}")
-    List<Integer> getPermissionsByRole(Integer roleId);
+    List<Integer> getPermissionsByRoleId(Integer roleId);
 
     @Delete("delete from tb_role_permission where role_id = #{roleId}")
     int removePermissionByRoleId(Integer roleId);

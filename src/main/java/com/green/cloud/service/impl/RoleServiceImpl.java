@@ -62,15 +62,14 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     }
 
     @Override
-    public Result updateRolePermission(String name, List<Integer> newPermission) {
+    public Result updateRolePermission(Integer roleId, List<Integer> newPermission) {
         QueryWrapper<Role> roleQueryWrapper = new QueryWrapper<>();
-        roleQueryWrapper.eq("role", name);
+        roleQueryWrapper.eq("id", roleId);
         Role role = getOne(roleQueryWrapper);
         if (role == null) {
             return Result.fail("角色不存在");
         }
         // 删除旧权限，添加新权限
-        Integer roleId = role.getId();
         roleMapper.removePermissionByRoleId(roleId);
 
         for (Integer permission : newPermission) {
@@ -101,6 +100,12 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
         roleMapper.removePermissionByRoleId(id);
 
         return Result.ok("角色删除成功");
+    }
+
+    @Override
+    public Result getPermissionsByRoleId(Integer roleId) {
+        List<Integer> permissionsByRoleId = roleMapper.getPermissionsByRoleId(roleId);
+        return Result.ok(permissionsByRoleId, Long.valueOf(permissionsByRoleId.size()));
     }
 
 

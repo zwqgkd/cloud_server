@@ -33,9 +33,9 @@ public class LoginController {
 
 
     @PostMapping("/role")
-    public String role(HttpServletRequest request, @RequestBody LoginForm loginForm) {
-        String email = loginForm.getEmail();
-        String password = loginForm.getPassword();
+    public String role(HttpServletRequest request, @RequestBody User user) {
+        String email = user.getEmail();
+        String password = user.getPassword();
         return userService.getRole(email, password);
 
     }

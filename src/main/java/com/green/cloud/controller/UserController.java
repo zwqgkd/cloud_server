@@ -3,7 +3,7 @@ package com.green.cloud.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.green.cloud.common.Result;
 import com.green.cloud.common.UserHolder;
-import com.green.cloud.entity.LoginForm;
+
 import com.green.cloud.entity.User;
 import com.green.cloud.service.IUserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -91,28 +91,28 @@ public class UserController {
 
 
     /**
-     * @param loginForm 前端传输过来的loginForm中的username和password不能为空
+     * @param user 前端传输过来的loginForm中的username和password不能为空
      * @return 登录成功后返回必要用户信息
      */
     @PostMapping("/login")
-    public Result login(@RequestBody LoginForm loginForm, HttpSession session) {
-        String email = loginForm.getEmail();
-        String password = loginForm.getPassword();
+    public Result login(@RequestBody User user, HttpSession session) {
+        String email = user.getEmail();
+        String password = user.getPassword();
 
-        return userService.login(email, password);
+        return userService.login(email, password, session);
     }
 
 
     @PostMapping("/register")
-    public Result register(@RequestBody LoginForm loginForm) {
-        String email = loginForm.getEmail();
-        String password = loginForm.getPassword();
-        User user = new User(); // 默认为普通用户
+    public Result register(@RequestBody User user) {
+        String email = user.getEmail();
+        String password = user.getPassword();
+        User newUser = new User(); // 默认为普通用户
         user.setEmail(email);
         user.setPassword(password);
 
 
-        if (userService.save(user)) {
+        if (userService.save(newUser)) {
             System.out.println("注册成功");
 
             return Result.ok("注册成功");

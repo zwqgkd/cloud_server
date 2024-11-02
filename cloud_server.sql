@@ -11,7 +11,7 @@
  Target Server Version : 80402
  File Encoding         : 65001
 
- Date: 27/10/2024 10:49:37
+ Date: 02/11/2024 21:00:25
 */
 
 SET NAMES utf8mb4;
@@ -57,6 +57,35 @@ CREATE TABLE `tb_license`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for tb_operator
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_operator`;
+CREATE TABLE `tb_operator`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `dll_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `json_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `software_version` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `group_id` int(0) NULL DEFAULT NULL,
+  `owner_id` int(0) NULL DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `update_time` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for tb_operator_group
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_operator_group`;
+CREATE TABLE `tb_operator_group`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for tb_permission
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_permission`;
@@ -65,36 +94,7 @@ CREATE TABLE `tb_permission`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `group_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of tb_permission
--- ----------------------------
-INSERT INTO `tb_permission` VALUES (1, '用户删除', '用户管理');
-INSERT INTO `tb_permission` VALUES (2, '用户新增', '用户管理');
-INSERT INTO `tb_permission` VALUES (3, '用户查询', '用户管理');
-INSERT INTO `tb_permission` VALUES (4, '用户编辑', '用户管理');
-INSERT INTO `tb_permission` VALUES (5, '重置密码', '用户管理');
-INSERT INTO `tb_permission` VALUES (6, '算子新增', '算子管理');
-INSERT INTO `tb_permission` VALUES (7, '算子查询', '算子管理');
-INSERT INTO `tb_permission` VALUES (8, '算子删除', '算子管理');
-INSERT INTO `tb_permission` VALUES (9, '算子更新', '算子管理');
-INSERT INTO `tb_permission` VALUES (10, '算子审核', '算子管理');
-INSERT INTO `tb_permission` VALUES (11, '算子详情', '算子管理');
-INSERT INTO `tb_permission` VALUES (12, '方案新增', '方案管理');
-INSERT INTO `tb_permission` VALUES (13, '方案查询', '方案管理');
-INSERT INTO `tb_permission` VALUES (14, '方案删除', '方案管理');
-INSERT INTO `tb_permission` VALUES (15, '方案更新', '方案管理');
-INSERT INTO `tb_permission` VALUES (16, '方案下载', '方案管理');
-INSERT INTO `tb_permission` VALUES (17, '方案审核', '方案管理');
-INSERT INTO `tb_permission` VALUES (18, '方案详情', '方案管理');
-INSERT INTO `tb_permission` VALUES (19, 'License基础信息管理', 'License管理');
-INSERT INTO `tb_permission` VALUES (20, 'License新增', 'License管理');
-INSERT INTO `tb_permission` VALUES (21, 'License查询', 'License管理');
-INSERT INTO `tb_permission` VALUES (22, 'License编辑', 'License管理');
-INSERT INTO `tb_permission` VALUES (23, '软件下载', '软件管理');
-INSERT INTO `tb_permission` VALUES (24, '软件版本查询', '软件管理');
-INSERT INTO `tb_permission` VALUES (25, '软件更新', '软件管理');
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tb_procedure_index
@@ -105,7 +105,7 @@ CREATE TABLE `tb_procedure_index`  (
   `procedure_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `directory_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tb_role
@@ -118,14 +118,7 @@ CREATE TABLE `tb_role`  (
   `create_time` datetime(0) NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1873600515 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of tb_role
--- ----------------------------
-INSERT INTO `tb_role` VALUES (1, '超级管理员', '张三', '2024-10-25 15:31:09', '2024-10-26 15:31:14');
-INSERT INTO `tb_role` VALUES (2, '管理员', '张三', '2024-10-25 15:31:10', '2024-10-27 15:31:18');
-INSERT INTO `tb_role` VALUES (3, '普通用户', '张三', '2024-10-25 15:31:12', '2024-10-27 15:31:21');
+) ENGINE = InnoDB AUTO_INCREMENT = 581771265 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tb_role_permission
@@ -136,15 +129,7 @@ CREATE TABLE `tb_role_permission`  (
   `role_id` int(0) NULL DEFAULT NULL,
   `permission_id` int(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of tb_role_permission
--- ----------------------------
-INSERT INTO `tb_role_permission` VALUES (1, 1, 1);
-INSERT INTO `tb_role_permission` VALUES (2, 1, 2);
-INSERT INTO `tb_role_permission` VALUES (3, 1, 3);
-INSERT INTO `tb_role_permission` VALUES (4, 1, 4);
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for tb_user

@@ -13,10 +13,12 @@ public interface IRoleService extends IService<Role> {
 
     Result addRolePermission(String role, List<Integer> permissionIds);
 
-    Result updateRolePermission(String role, List<Integer> newPermission);
+    Result updateRolePermission(Integer roleId, List<Integer> newPermission);
 
 
     Result listPermission();
 
     Result deleteById(Integer id);
+
+    Result getPermissionsByRoleId(Integer roleId);
 }
